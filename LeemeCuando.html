@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leeme Cuando</title>
+    <style>
+        :root {
+            --lila: #f3eaff;
+            --verde: #82e0aa;
+            --azul: #85c1e9;
+            --naranja: #f8c471;
+            --lila-oscuro: #a569bd;
+            --texto: #5b2c6f;
+            --oro: #d4af37;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1f9 100%);
+            margin: 0;
+            color: var(--texto);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .card-inicio {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--lila-oscuro);
+            border-right: 5px solid var(--lila-oscuro);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .titulo-inicio {
+            color: #6a1b9a;
+            font-size: 28px;
+            margin: 0 0 15px 0;
+        }
+
+        .divisor-inicio {
+            border: 0;
+            border-top: 1px solid #d7bde2;
+            margin: 15px auto;
+            width: 80%;
+        }
+
+        .bienvenida-inicio {
+            font-style: italic;
+            font-size: 16px;
+            color: var(--texto);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .hidden { display: none !important; }
+
+        h1 { color: #6a1b9a; font-size: 28px; margin-bottom: 5px; }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 50px;
+            background: var(--lila-oscuro);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(165, 105, 189, 0.3);
+        }
+
+        button:hover { transform: scale(1.05); background: #8e44ad; }
+        button:disabled { background: #d7bde2; transform: none; }
+
+        .emociones-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .mazo-container {
+            perspective: 1000px;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .tarjeta-magica {
+            width: 200px;
+            height: 260px;
+            background: white;
+            border-radius: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid var(--lila-oscuro);
+            box-shadow: 0 15px 35px rgba(106, 27, 154, 0.15);
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tarjeta-magica::before {
+            content: "✝️";
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .tarjeta-magica::after {
+            content: "✝️";
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 14px;
+            color: var(--lila-oscuro);
+        }
+
+        .tarjeta-magica span {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4a148c;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .mezclando {
+            animation: shuffle 0.2s infinite alternate;
+        }
+
+        @keyframes shuffle {
+            from { transform: rotate(-4deg) translateX(-5px); }
+            to { transform: rotate(4deg) translateX(5px); }
+        }
+
+        .card-resultado {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            margin-top: 25px;
+            position: relative;
+            border-left: 6px solid var(--lila-oscuro);
+            border-right: 6px solid var(--lila-oscuro);
+            border-radius: 40px; 
+            border-top: 0;
+            border-bottom: 0;
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .btn-volver { background: #bb8fce !important; font-size: 12px; }
+        .btn-whatsapp { background: #25D366 !important; font-size: 14px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+    </style>
+</head>
+<body>
+
+<div class="container" id="inicio">
+    <div class="card-inicio">
+        <h1 class="titulo-inicio">Léeme cuando...</h1>
+        <hr class="divisor-inicio">
+        <p class="bienvenida-inicio">
+           Hola Sara, Bienvenida a "Léeme Cuando". Quería hacerte un regalo tan especial y unico como tu, y que te ayude en tu día a día. <br><br>
+           Sarita, aquí encontrarás una serie de citas bíblicas para diferentes ocasiones de tu vida. Todas y cada una te recordarán que puedes con todo y te ayudarán a sobrellevar las diferentes circunstancias en las que te encuentres. <br><br>
+           Te amo más que siete. 
+        </p>
+    </div>
+    <button onclick="cambiarPantalla('inicio', 'pantalla-emociones')">Entrar</button>
+</div>
+
+<div class="container hidden" id="pantalla-emociones">
+    <h2>Léeme cuando: </h2>
+    <div class="emociones-grid">
+        <button onclick="prepararTarjeta('triste')" style="background: var(--azul)"> Estés Triste</button>
+        <button onclick="prepararTarjeta('miedo')" style="background: var(--naranja)"> Tengas Miedo</button>
+        <button onclick="prepararTarjeta('sola')" style="background: var(--lila-oscuro)"> Te sientas Sola</button>
+        <button onclick="prepararTarjeta('cansada')" style="background: #FF69B4"> Te sientas Cansada</button>
+        <button onclick="prepararTarjeta('angustiada')" style="background: #e57373"> Estés Angustiada</button>
+        <button onclick="irAWhatsApp()" class="btn-whatsapp">Aquí estoy</button>
+    </div>
+    <button onclick="location.reload()" class="btn-volver" style="margin-top: 20px;">Inicio</button>
+</div>
+
+<div class="container hidden" id="pantalla-accion">
+    <h3>Toma una cartita y confia...</h3>
+    
+    <div class="mazo-container">
+        <div id="tarjeta" class="tarjeta-magica">
+            <span id="texto-tarjeta">✨</span>
+        </div>
+    </div>
+
+    <button id="btn-revelar" onclick="revelarMensaje()">Abrir la cartita</button>
+    <br>
+    <button onclick="volverAEmociones()" class="btn-volver">Probar otro sentimiento</button>
+
+    <div id="resultado" class="card-resultado hidden">
+        <p id="versiculo" style="font-style: italic; font-size: 17px; color: #4a148c; padding: 0 10px;"></p>
+        <hr style="border:0; border-top: 1px solid #d7bde2; margin: 15px 0;">
+        <p id="mensaje" style="font-weight: bold; color: #8e44ad; font-size: 15px; padding: 0 10px;"></p>
+    </div>
+</div>
+
+<script>
+const data = {
+    triste: [
+        {ref:"Salmos 34:18", v:"Cercano está Jehová a los quebrantados de corazón; Y salva a los contritos de espíritu.", m:"Sarita, Diosito está justo a tu lado ahora mismo, cuando más mal te sientes y cuando menos puedes, ahí está Dios contigo."},
+        {ref:"Salmos 147:3", v:"Él sana a los quebrantados de corazón, Y venda sus heridas.", m:"Dios será tu lugar seguro Sarita, Él te curará de absolutamente todo y sanará cada dolencia que tienes."},
+        {ref:"Apocalipsis 21:4", v:"Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor; porque las primeras cosas pasaron.", m:"Dios seca cada una de tus lágrimas y venda cada una de tus heridas, Sarita."},
+        {ref:"Salmos 30:5", v:"Porque un momento será su furor, Pero su favor dura toda la vida. Por la noche durará el lloro, Y la mañana vendrá llena de alegría.", m:"Todo pasará Sarita, todo eso que hoy te duele pasará y sanará."},
+        {ref:"Mateo 5:4", v:"Bienaventurados los que lloran, porque ellos recibirán consolación.", m:"Sarita, Dios te está abrazando cada vez que estás mal, Él te consolará y curará."},
+        {ref:"Salmos 42:11", v:"¿Por qué te abates, oh alma mía, Y por qué te turbas dentro de mí? Espera en Dios; porque aún he de alabarle, Salvación mía y Dios mío.", m:"Sarita, volverán los días buenos y brillantes, espera en Dios que Él lo acomodará todo."},
+        {ref:"Isaías 41:10", v:"No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.", m:"Él te sostendrá y te guiará durante el camino, te ayudará y secará cada una de tus lágrimas."},
+        {ref:"Juan 16:33", v:"Estas cosas os he hablado para que en mí tengáis paz. En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo.", m:"Sarita, Diosito ya está armando un plan tan bonito y brillante como tú, todo estará bien."},
+        {ref:"Salmos 56:8", v:"Mis huidas tú has contado; Pon mis lágrimas en tu redoma; ¿No están ellas en tu libro?", m:"Él conoce cada detalle de tu sentir, mi niña, ninguna lágrima tuya le es indiferente."},
+        {ref:"Isaías 61:3", v:"A ordenar que a los afligidos de Sion se les dé gloria en lugar de ceniza, óleo de gozo en lugar de luto, manto de alegría en lugar de espíritu angustiado.", m:"Dios transformará tu tristeza en algo hermoso Sara, y opacará toda oscuridad con su brillo."},
+        {ref:"2 Corintios 1:3", v:"Bendito sea el Dios y Padre de nuestro Señor Jesucristo, Padre de misericordias y Dios de toda consolación.", m:"Sarita, busca y clama a Dios, su misericordia es infinita y te ayudará en este mal momento."},
+        {ref:"Salmos 126:5", v:"Los que sembraron con lágrimas, con regocijo segarán.", m:"Tu esfuerzo dará frutos alegres pronto Sarita, cada lágrima derramada será una bendición en tu futuro."},
+        {ref:"Jeremías 31:13", v:"Entonces la virgen se alegrará en la danza, los jóvenes y los viejos juntamente; y cambiaré su lloro en gozo, y los consolaré, y los alegraré de su dolor.", m:"Diosito tiene un plan de alegría y bienestar para ti, Él te consolará y traerá días tan maravillosos como tú."},
+        {ref:"Salmos 23:3", v:"Confortará mi alma; me guiará por sendas de justicia por amor a su nombre.", m:"Deja que Dios guíe tus pasos mi niña, Él te llevará hacia esa felicidad y tranquilidad que tanto necesitas."}
+    ],
+    miedo: [
+        {ref:"Josué 1:9", v:"Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo en dondequiera que vayas.", m:"Sarita, eres mucho más valiente de lo que crees, y Diosito camina a tu lado en cada paso y dificultad que tengas."},
+        {ref:"2 Timoteo 1:7", v:"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.", m:"Tienes un corazón lleno de poder y amor, Sara. Eres más fuerte de lo que crees mi niña, no dejes que el miedo apague tu hermosa luz."},
+        {ref:"Salmos 27:1", v:"Jehová es mi luz y mi salvación; ¿de quién temeré? Jehová es la fortaleza de mi vida; ¿de quién he de atemorizarme?", m:"La luz de Dios es como un faro para ti, Sarita; nada puede dañarte si Él te ilumina."},
+        {ref:"Salmos 56:3", v:"En el día que temo, Yo en ti confío.", m:"No está mal sentir miedo a veces, Sarita, solo recuerda confiar en Dios."},
+        {ref:"Isaías 43:1", v:"Ahora, así dice Jehová, Creador tuyo, oh Jacob, y Formador tuyo, oh Israel: No temas, porque yo te redimí; te puse nombre, mía eres tú.", m:"Sarita, eres una niña única y valiosa a los ojos de Dios. Él te cuida porque eres su tesoro más preciado y te ama con todo su corazón."},
+        {ref:"Salmos 91:5", v:"No temerás el terror nocturno, Ni saeta que vuele de día.", m:"Descansa tranquila, Sarita. Estás bajo los brazos de Dios y nada malo pasará."},
+        {ref:"1 Juan 4:18", v:"En el amor no hay temor, sino que el perfecto amor echa fuera el temor; porque el temor lleva en sí castigo.", m:"Sarita, deja que el amor de Dios te abrace hoy. Su amor es más grande que cualquier problema o preocupación."},
+        {ref:"Salmos 34:4", v:"Busqué a Jehová, y él me oyó, Y me libró de todos mis temores.", m:"Él ya escuchó ese suspiro tuyo, Sarita, y ya está obrando para darte paz y seguridad."},
+        {ref:"Filipenses 4:13", v:"Todo lo puedo en Cristo que me fortalece.", m:"No necesitas hacerlo todo sola, Sarita. Dios te da de sus fuerzas cuando las tuyas ya no son suficientes."},
+        {ref:"Salmos 118:6", v:"Jehová está conmigo; no temeré lo que me pueda hacer el hombre.", m:"Sara, tienes al Dios que creó todo el universo cuidando de ti hoy y siempre."},
+        {ref:"Isaías 35:4", v:"Decid a los de corazón apocado: Esforzaos, no temáis; he aquí que vuestro Dios viene con retribución, con pago de Dios; él mismo vendrá, y os salvará.", m:"Tranquila Sarita, Dios está contigo y te ayuda porque te ama inmensamente."},
+        {ref:"Deuteronomio 31:6", v:"Esforzaos y cobrad ánimo; no temáis, ni tengáis miedo de ellos, porque Jehová tu Dios es el que va contigo; no te dejará, ni te desamparará.", m:"No tengas miedo Sara, Dios está contigo en todo momento y, aunque no lo veas, Él está sosteniendo tu mano y aliviando tus miedos."},
+        {ref:"Salmos 46:1", v:"Dios es nuestro amparo y fortaleza, Nuestro pronto auxilio en las tribulaciones.", m:"Cuando sientas que el mundo se te viene encima, Dios es tu refugio seguro, Sarita. Nada te dañará y nada malo va a pasar."},
+        {ref:"Romanos 8:31", v:"¿Qué, pues, diremos a esto? Si Dios es por nosotros, ¿quién contra nosotros?", m:"Nada puede vencer a una mujer tan maravillosa como tú cuando Dios está contigo. No tengas miedo porque Él te protegerá."}
+    ],
+    sola: [
+        {ref:"Mateo 28:20", v:"Enseñándoles que guarden todas las cosas que os he mandado; y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo. Amén.", m:"En cada momento, en cada día, a cada minuto y en todo segundo Dios está contigo, mi niña. Nunca caminarás solita."},
+        {ref:"Hebreos 13:5", v:"Sean vuestras costumbres sin avaricia, contentos con lo que tenéis ahora; porque él dijo: No te desampararé, ni te dejaré.", m:"Aunque no veas a nadie, Dios no te dejará sola nunca, Él siempre estará contigo Sarita."},
+        {ref:"Isaías 41:13", v:"Porque yo Jehová soy tu Dios, quien te sostiene de tu mano derecha, y te dice: No temas, yo te ayudo.", m:"Hasta en los momentos donde más sola te sientes, ahí está Dios contigo, apoyándote e iluminando tu camino."},
+        {ref:"Salmos 139:7", v:"¿A dónde me iré de tu Espíritu? ¿Y a dónde huiré de tu presencia?", m:"Es imposible que estés sola Sarita, Dios te dio el Espíritu Santo, Él te abraza en todo momento."},
+        {ref:"Juan 14:18", v:"No os dejaré huérfanos; vendré a vosotros.", m:"Sara, Dios siempre encuentra la forma de recordarte que te ama, que no estás sola y que nunca lo estarás."},
+        {ref:"Salmos 68:6", v:"Dios hace habitar en familia a los desamparados; saca a los cautivos a prosperidad; mas los rebeldes habitan en tierra seca.", m:"Dios es tu familia, tu hogar y tu refugio, Sarita. En Su corazón siempre tienes un lugar, Él siempre piensa y obra por ti."},
+        {ref:"Jeremías 31:3", v:"Jehová se manifestó a mí hace ya mucho tiempo, diciendo: Con amor eterno te he amado; por tanto, te prolongué mi misericordia.", m:"¿Acaso hay un amor más lindo que el de Dios? Él te amó desde antes de que nacieras, y ese amor nunca se terminará."},
+        {ref:"Isaías 49:15", v:"¿Se olvidará la mujer de lo que dio a luz, para dejar de compadecerse del hijo de su vientre? Aunque olvide ella, yo nunca me olvidaré de ti.", m:"Dios jamás te olvidará, Sarita. Él te ve siempre, incluso en los momentos más difíciles, y te acompañará en cada dificultad."},
+        {ref:"Salmos 27:10", v:"Aunque mi padre y mi madre me dejaran, Con todo, Jehová me recogerá.", m:"El amor que Dios te tiene es inmenso, Sarita. Él nunca te dejará sola, ni siquiera en tu peor momento."},
+        {ref:"Sofonías 3:17", v:"Jehová está en medio de ti, poderoso, él salvará; se gozará sobre ti con alegría, callará de amor, se regocijará sobre ti con cántico.", m:"Diosito está muy feliz de que estés aquí, Sara. Él te mira y reconforta en tus peores momentos."},
+        {ref:"Mateo 18:20", v:"Porque donde están dos o tres congregados en mi nombre, allí estoy yo en medio de ellos.", m:"Dios acompaña cada una de tus charlas y silencios, Sarita. Él siempre está contigo."},
+        {ref:"Salmos 121:5", v:"Jehová es tu guardador; Jehová es tu sombra a tu mano derecha.", m:"Dios siempre vela por tu seguridad, Sarita. Él está cuidando que nada malo te pase."},
+        {ref:"Gálatas 2:20", v:"Con Cristo estoy juntamente crucificado, y ya no vivo yo, mas vive Cristo en mí; y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó y se entregó a sí mismo por mí.", m:"Sarita, llevas contigo la compañía más pura y hermosa dentro de tu corazón, Él siempre está contigo."},
+        {ref:"Salmos 16:8", v:"A Jehová he puesto siempre delante de mí. Porque está a mi diestra, no seré conmovido.", m:"Sarita, Dios camina contigo en todo momento y lugar. Él nunca te abandona ni te deja sola."}
+    ],
+    cansada: [
+        {ref:"Mateo 11:28", v:"Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar.", m:"Mi niña, puedes soltar todas esas cosas que te pesan. Dios se encargará de todo, Él te ayudará y te dará descanso."},
+        {ref:"Isaías 40:29", v:"Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas.", m:"Diosito renueva tus fuerzas cada día. Él te dará la energía que necesitas para afrontarlo todo."},
+        {ref:"Salmos 62:1", v:"En Dios solamente descansa mi alma; De él viene mi salvación.", m:"Sarita, busca un momento de silencio y respira profundo. Deja que Dios calme tu cansancio y te dé más fuerzas."},
+        {ref:"Isaías 40:31", v:"Pero los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas; correrán, y no se cansarán; caminarán, y no se fatigarán.", m:"Tal vez hoy estés cansada, Sarita, pero encomiéndate a Dios y Él renovará tus energías."},
+        {ref:"Salmos 121:3", v:"No dará tu pie al resbaladero, Ni se dormirá el que te guarda.", m:"Dios cuidará tus pasos mientras cierras tus ojitos, Sara. No te preocupes por nada, solo confía en Él."},
+        {ref:"Filipenses 4:7", v:"Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.", m:"Sarita, deja que la paz de Dios te dé esa calma y tranquilidad que tu corazón necesita ahora."},
+        {ref:"Salmos 4:8", v:"En paz me acostaré, y asimismo dormiré; Porque solo tú, Jehová, me haces vivir confiado.", m:"Duerme tranquila, mi niña. Dios se queda despierto cuidando de ti y restaurando tus fuerzas."},
+        {ref:"Éxodo 33:14", v:"Y él dijo: Mi presencia irá contigo, y te daré descanso.", m:"Sarita, no tienes que hacer nada, Dios ya está obrando para darte descanso y fuerzas nuevas."},
+        {ref:"Salmos 23:2", v:"En lugares de delicados pastos me hará descansar; Junto a aguas de reposo me pastoreará.", m:"No te agobies por las cosas que vienen, Sarita. Dios ya está obrando para bien en tu vida."},
+        {ref:"Jeremías 31:25", v:"Porque satisfaré al alma cansada, y saciaré a toda alma afligida.", m:"Descansa por hoy, Sarita. Dios te brindará las energías para afrontar cada circunstancia. Mañana será un mejor día."},
+        {ref:"Salmos 116:7", v:"Vuelve, oh alma mía, a tu reposo, Porque Jehová te ha hecho bien.", m:"Ve a los brazos de Dios, Sara. Él te dará descanso, tranquilidad y bienestar a tu corazón."},
+        {ref:"Gálatas 6:9", v:"No nos cansemos, pues, de hacer bien; porque a su tiempo segaremos, si no desmayamos.", m:"Sarita, todos tus esfuerzos y dedicación darán fruto. Descansa hoy para seguir brillando mañana."},
+        {ref:"Salmos 94:19", v:"En la multitud de mis pensamientos dentro de mí, Tus consolaciones alegraban mi alma.", m:"Cuando más cansada estés, Dios te abraza y te protege. Él te dará paz para tu alma."},
+        {ref:"2 Tesalonicenses 3:13", v:"Y vosotros, hermanos, no os canséis de hacer bien.", m:"Nunca te canses de hacer el bien, Sarita. Dios ve y valora cada una de tus buenas intenciones."}
+    ],
+    angustiada: [
+        {ref:"Filipenses 4:6", v:"Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias.", m:"Cuéntale todo lo que te preocupa, Sarita. Dios es el mejor escuchando; Él te oirá y quitará tus preocupaciones."},
+        {ref:"1 Pedro 5:7", v:"Echando toda vuestra ansiedad sobre él, porque él tiene cuidado de vosotros.", m:"Sarita, esa angustia es muy pesada para ti sola. Dásela a Dios y Él se encarga de todo."},
+        {ref:"Salmos 94:19", v:"En la multitud de mis pensamientos dentro de mí, Tus consolaciones alegraban mi alma.", m:"Encomiéndate a Dios, Sarita, y Él apagará toda esa ansiedad en tu alma."},
+        {ref:"Juan 14:27", v:"La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo.", m:"Cuando más angustiada estés, recuerda que Dios te regala su paz. Él solucionará cada circunstancia."},
+        {ref:"Salmos 34:17", v:"Claman los justos, y Jehová oye, Y los libra de todas sus angustias.", m:"Encomiéndate a Dios, mi niña. Él te liberará de ese peso que te atormenta."},
+        {ref:"Isaías 26:3", v:"Tú guardarás en completa paz a aquel cuyo pensamiento en ti persevera; porque en ti ha confiado.", m:"Mira hacia Dios, Sarita, no hacia el problema. Dios es mucho más grande que cualquier angustia."},
+        {ref:"Salmos 55:22", v:"Echa sobre Jehová tu carga, y él te sustentará; No dejará para siempre caído al justo.", m:"No cargues con eso tú solita, mi niña. Suéltalo en manos de Dios y deja que Él lo solucione."},
+        {ref:"Juan 14:1", v:"No se turbe vuestro corazón; creéis en Dios, creed también en mí.", m:"Quédate tranquila, Sarita. Dios tiene el control de todo lo que está pasando."},
+        {ref:"Salmos 107:28", v:"Entonces claman a Jehová en su angustia, Y los libra de sus aflicciones.", m:"Mi niña, cada oración la escucha Dios. Él acomodará todas las cosas a su tiempo."},
+        {ref:"Salmos 46:10", v:"Estad quietos, y conoced que yo soy Dios; Seré exaltado entre las naciones; enaltecido seré en la tierra.", m:"Sarita, quédate un ratito quieta y solo confía en Dios. Él arreglará lo que está mal."},
+        {ref:"Nahúm 1:7", v:"Jehová es bueno, fortaleza en el día de la angustia; y conoce a los que en él confían.", m:"Sarita, Dios es tu fortaleza hoy. Él sabe qué necesitas y te brindará lo necesario para seguir."},
+        {ref:"Mateo 6:34", v:"Así que, no os afanéis por el día de mañana, porque el día de mañana traerá su afán. Basta a cada día su propio mal.", m:"Vive solo este momento, Sarita. Dios ya está en tu mañana ordenando todo para bien."},
+        {ref:"Salmos 138:7", v:"Si anduviere yo en medio de la angustia, tú me vivificarás; Contra la ira de mis enemigos extenderás tu mano, Y me salvará tu diestra.", m:"Diosito te dará fuerzas nuevas, mi niña. Él te sostendrá cuando sientas que ya no puedes."},
+        {ref:"2 Corintios 12:9", v:"Y me ha dicho: Bástate mi gracia; porque mi poder se perfecciona en la debilidad. Por tanto, de buena gana me gloriaré más bien en mis debilidades, para que repose sobre mí el poder de Cristo.", m:"Recuerda que en tu momento más difícil, Dios te da la fuerza necesaria. ¡Eres maravillosa y única!"}
+    ]
+};
+
+let emocionActual = "";
+
+function cambiarPantalla(ocultar, mostrar) {
+    document.getElementById(ocultar).classList.add("hidden");
+    document.getElementById(mostrar).classList.remove("hidden");
+    window.scrollTo(0,0);
+}
+
+function prepararTarjeta(emocion) {
+    emocionActual = emocion;
+    cambiarPantalla('pantalla-emociones', 'pantalla-accion');
+    document.getElementById("texto-tarjeta").innerText = "✨";
+    document.getElementById("resultado").classList.add("hidden");
+    document.getElementById("btn-revelar").disabled = false;
+    document.getElementById("tarjeta").style.transform = "rotateY(0deg)";
+}
+
+function revelarMensaje() {
+    const lista = data[emocionActual];
+    const item = lista[Math.floor(Math.random() * lista.length)];
+    const tarjeta = document.getElementById("tarjeta");
+    const btn = document.getElementById("btn-revelar");
+
+    btn.disabled = true;
+    tarjeta.classList.add("mezclando");
+
+    setTimeout(() => {
+        tarjeta.classList.remove("mezclando");
+        tarjeta.style.transform = "rotateY(360deg)";
+        
+        document.getElementById("texto-tarjeta").innerText = item.ref;
+        document.getElementById("versiculo").innerText = item.v;
+        document.getElementById("mensaje").innerText = item.m;
+        
+        document.getElementById("resultado").classList.remove("hidden");
+        document.getElementById("resultado").scrollIntoView({ behavior: 'smooth' });
+    }, 1000);
+}
+
+function volverAEmociones() {
+    cambiarPantalla('pantalla-accion', 'pantalla-emociones');
+}
+
+function irAWhatsApp() {
+    const numero = "595984529043"; 
+    const mensaje = encodeURIComponent("Holi Sarita, estamos a muchos kílometros de distacia, pero cuando me necesites, solo estaré a un click de ti.");
+    window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+}
+</script>
+</body>
+</html>
